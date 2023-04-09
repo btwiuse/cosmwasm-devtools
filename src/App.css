@@ -52,7 +52,7 @@ sl-divider {
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
-  flex-grow: 1;
+  border-top: solid 1px #ccc;
 }
 
 .connection {

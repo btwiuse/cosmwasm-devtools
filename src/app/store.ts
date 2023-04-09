@@ -6,6 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import appReducer from "../features/app/appSlice";
 import accountsReducer from "../features/accounts/accountsSlice";
 import connectionReducer from "../features/connection/connectionSlice";
 import messagesReducer from "../features/messages/messagesSlice";
@@ -20,6 +21,7 @@ const persistConfig = {
 const reducer = persistReducer(
   persistConfig,
   combineReducers({
+    appState: appReducer,
     accounts: accountsReducer,
     connection: connectionReducer,
     messages: messagesReducer,

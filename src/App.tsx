@@ -11,17 +11,52 @@ import { ExecuteOptions } from "./features/console/ExecuteOptions";
 import { Header } from "./components/Header";
 import { Donate } from "./features/accounts/Donate";
 import { InstantiateOptions } from "./features/console/InstantiateOptions";
+import { useAppDispatch, useAppSelector } from "./app/hooks";
+import { AppLocations, changeAppLocation } from "./features/app/appSlice";
+import { Menu } from "primereact/menu";
 
 setBasePath(
     "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.64/dist/"
 );
 function App() {
+    const dispatch = useAppDispatch();
+    const appLocation = useAppSelector((state) => state.appState.appLocation);
+
+    const menuItems = [
+        {
+            label: "Menu",
+            items: [
+                {
+                    label: "Home",
+                    icon: "pi pi-home",
+                    command: () => {
+                        dispatch(changeAppLocation(AppLocations.Home));
+                    },
+                    className: appLocation == AppLocations.Home ? "bg-gray-100" : "",
+                },
+                {
+                    label: "Bech Converter",
+                    icon: "pi pi-arrow-right-arrow-left",
+                    command: () => {
+                        dispatch(changeAppLocation(AppLocations.BechConverter));
+                    },
+                    className: appLocation == AppLocations.BechConverter ? "bg-gray-100" : "",
+                },
+            ],
+        },
+    ];
+
     return (
         <div className="main">
             <aside className="sidebar">
                 <Header />
-                <div className="sidebar-main pt-4">
+                <div className="border border-bottom py-2">
                     <AccountList />
+                </div>
+                <div className="sidebar-main flex-none">
+                    <Menu model={menuItems} className="!w-full" />
+                </div>
+                <div className="sidebar-main grow">
                     <ContractList />
                 </div>
                 <div className="connection border border-top pt-2">
@@ -29,7 +64,13 @@ function App() {
                 </div>
             </aside>
             <section className="console">
-                <Console />
+                {appLocation === AppLocations.Home ? (
+                    <Console />
+                ) : appLocation === AppLocations.BechConverter ? (
+                    <div>BechConverter</div>
+                ) : (
+                    <Console />
+                )}
             </section>
             <Configuration />
             <Messages />
