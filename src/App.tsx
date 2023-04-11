@@ -14,6 +14,7 @@ import { InstantiateOptions } from "./features/console/InstantiateOptions";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { AppLocations, changeAppLocation } from "./features/app/appSlice";
 import { Menu } from "primereact/menu";
+import { BechConverter } from "./features/tools/bechconverter";
 
 setBasePath(
     "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.64/dist/"
@@ -27,12 +28,13 @@ function App() {
             label: "Menu",
             items: [
                 {
-                    label: "Home",
+                    label: "Contract Explorer",
                     icon: "pi pi-home",
                     command: () => {
                         dispatch(changeAppLocation(AppLocations.Home));
                     },
-                    className: appLocation == AppLocations.Home ? "bg-gray-100" : "",
+                    className:
+                        appLocation === AppLocations.Home ? "bg-gray-100" : "",
                 },
                 {
                     label: "Bech Converter",
@@ -40,7 +42,10 @@ function App() {
                     command: () => {
                         dispatch(changeAppLocation(AppLocations.BechConverter));
                     },
-                    className: appLocation == AppLocations.BechConverter ? "bg-gray-100" : "",
+                    className:
+                        appLocation === AppLocations.BechConverter
+                            ? "bg-gray-100"
+                            : "",
                 },
             ],
         },
@@ -67,7 +72,7 @@ function App() {
                 {appLocation === AppLocations.Home ? (
                     <Console />
                 ) : appLocation === AppLocations.BechConverter ? (
-                    <div>BechConverter</div>
+                    <BechConverter />
                 ) : (
                     <Console />
                 )}
