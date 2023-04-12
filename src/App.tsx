@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { AppLocations, changeAppLocation } from "./features/app/appSlice";
 import { Menu } from "primereact/menu";
 import { BechConverter } from "./features/tools/bechconverter";
+import { MsgSigner } from "./features/tools/msgsigner";
 
 setBasePath(
     "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.64/dist/"
@@ -47,6 +48,17 @@ function App() {
                             ? "bg-gray-100"
                             : "",
                 },
+                {
+                    label: "Msg Sign & Verify",
+                    icon: "pi pi-check-circle",
+                    command: () => {
+                        dispatch(changeAppLocation(AppLocations.MsgSignVerify));
+                    },
+                    className:
+                        appLocation === AppLocations.MsgSignVerify
+                            ? "bg-gray-100"
+                            : "",
+                },
             ],
         },
     ];
@@ -73,6 +85,8 @@ function App() {
                     <Console />
                 ) : appLocation === AppLocations.BechConverter ? (
                     <BechConverter />
+                ) : appLocation === AppLocations.MsgSignVerify ? (
+                    <MsgSigner />
                 ) : (
                     <Console />
                 )}

@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export enum AppLocations {
   Home = "",
   BechConverter = "bechConverter",
+  MsgSignVerify = "msgSignVerify"
 }
 
 export interface AppState {

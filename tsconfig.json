@@ -21,5 +21,8 @@
     "jsx": "react-jsx",
     "downlevelIteration": true
   },
+  "paths": {
+    "cosmjs-types/*": ["node_modules/cosmjs-types/*"]
+  },
   "include": ["src", "*.d.ts"]
 }

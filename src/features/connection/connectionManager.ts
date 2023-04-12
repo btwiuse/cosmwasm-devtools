@@ -14,10 +14,12 @@ import { Account, AccountType } from "../accounts/accountsSlice";
 import { getKeplr } from "../accounts/useKeplr";
 
 import { QueryClientImpl as BankQueryClientImpl } from "cosmjs-types/cosmos/bank/v1beta1/query";
+import { QueryClientImpl as AccountQueryClientImpl } from "cosmjs-types/cosmos/auth/v1beta1/query";
 
 interface ClientConnection {
     client?: QueryClient & WasmExtension;
     bankQueryService?: BankQueryClientImpl;
+    accountQueryService?: AccountQueryClientImpl;
     rpcEndpoint: string;
 }
 
@@ -63,6 +65,7 @@ class ConnectionManager {
                 client,
                 rpcEndpoint,
                 bankQueryService: new BankQueryClientImpl(rpcClient),
+                accountQueryService: new AccountQueryClientImpl(rpcClient),
             };
         }
 

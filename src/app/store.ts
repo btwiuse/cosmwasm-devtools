@@ -12,6 +12,7 @@ import connectionReducer from "../features/connection/connectionSlice";
 import messagesReducer from "../features/messages/messagesSlice";
 import consoleReducer from "../features/console/consoleSlice";
 import toolboxReducer from "../features/console/toolboxSlice";
+import signingReducer from "../features/tools/signingSlice";
 
 const persistConfig = {
   key: "root",
@@ -27,6 +28,7 @@ const reducer = persistReducer(
     messages: messagesReducer,
     console: consoleReducer,
     toolbox: toolboxReducer,
+    signing: signingReducer
   })
 );
 
