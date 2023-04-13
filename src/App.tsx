@@ -11,18 +11,17 @@ import { ExecuteOptions } from "./features/console/ExecuteOptions";
 import { Header } from "./components/Header";
 import { Donate } from "./features/accounts/Donate";
 import { InstantiateOptions } from "./features/console/InstantiateOptions";
-import { useAppDispatch, useAppSelector } from "./app/hooks";
-import { AppLocations, changeAppLocation } from "./features/app/appSlice";
 import { Menu } from "primereact/menu";
 import { BechConverter } from "./features/tools/bechconverter";
 import { MsgSigner } from "./features/tools/msgsigner";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 setBasePath(
     "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.64/dist/"
 );
 function App() {
-    const dispatch = useAppDispatch();
-    const appLocation = useAppSelector((state) => state.appState.appLocation);
+    const navigate = useNavigate();
+    const appLocation = useLocation();
 
     const menuItems = [
         {
@@ -32,19 +31,22 @@ function App() {
                     label: "Contract Explorer",
                     icon: "pi pi-home",
                     command: () => {
-                        dispatch(changeAppLocation(AppLocations.Home));
+                        navigate("/");
                     },
                     className:
-                        appLocation === AppLocations.Home ? "bg-gray-100" : "",
+                        appLocation.pathname === "" ||
+                        appLocation.pathname === "/"
+                            ? "bg-gray-100"
+                            : "",
                 },
                 {
                     label: "Bech Converter",
                     icon: "pi pi-arrow-right-arrow-left",
                     command: () => {
-                        dispatch(changeAppLocation(AppLocations.BechConverter));
+                        navigate("/bechconverter");
                     },
                     className:
-                        appLocation === AppLocations.BechConverter
+                        appLocation.pathname.toLowerCase() === "/bechconverter"
                             ? "bg-gray-100"
                             : "",
                 },
@@ -52,10 +54,10 @@ function App() {
                     label: "Msg Sign & Verify",
                     icon: "pi pi-check-circle",
                     command: () => {
-                        dispatch(changeAppLocation(AppLocations.MsgSignVerify));
+                        navigate("/msgsigner");
                     },
                     className:
-                        appLocation === AppLocations.MsgSignVerify
+                        appLocation.pathname.toLowerCase() === "/msgsigner"
                             ? "bg-gray-100"
                             : "",
                 },
@@ -81,15 +83,17 @@ function App() {
                 </div>
             </aside>
             <section className="console">
-                {appLocation === AppLocations.Home ? (
-                    <Console />
-                ) : appLocation === AppLocations.BechConverter ? (
-                    <BechConverter />
-                ) : appLocation === AppLocations.MsgSignVerify ? (
-                    <MsgSigner />
-                ) : (
-                    <Console />
-                )}
+                <Routes>
+                    <Route path="/">
+                        <Route index element={<Console />} />
+                        <Route
+                            path="bechconverter"
+                            element={<BechConverter />}
+                        />
+                        <Route path="msgsigner" element={<MsgSigner />} />
+                        <Route path="*" element={<Console />} />
+                    </Route>
+                </Routes>
             </section>
             <Configuration />
             <Messages />

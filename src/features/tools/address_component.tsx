@@ -14,7 +14,7 @@ export const AddressComponent = (props: {
     const [copied, setCopied] = useState(false);
 
     const updateCopied = () => {
-        setCopied(!copied);
+        setCopied(true);
 
         setTimeout(() => {
             setCopied(false);

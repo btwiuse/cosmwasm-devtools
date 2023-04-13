@@ -1,6 +1,6 @@
-# cøsmwasm devtøøls
+# Overview
 
-a tool for interacting with cosmwasm contracts. online at https://cosmwasm.tools
+originally: cøsmwasm devtøøls by aswever, but due to a stale repo, I've forked it and added some additionals tools. More to come!
 
 ## how to use
 

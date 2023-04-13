@@ -163,6 +163,10 @@ export const signingSlice = createSlice({
         setOutput: (state, action: PayloadAction<string>) => {
             state.output = action.payload;
         },
+        resetState: (state) => {
+            state.output = "Awaiting orders"
+            state.signedMsg = initialState.signedMsg;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -172,6 +176,7 @@ export const signingSlice = createSlice({
             })
             .addCase(run.fulfilled, (state, action) => {
                 if (action.payload.verified === undefined) {
+                    state.output = "Message signed!";
                     state.signedMsg = action.payload;
                 } else {
                     let outputMsg =
@@ -190,6 +195,6 @@ export const signingSlice = createSlice({
     },
 });
 
-export const { setOutput } = signingSlice.actions;
+export const { resetState, setOutput } = signingSlice.actions;
 
 export default signingSlice.reducer;
