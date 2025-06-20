@@ -1,4 +1,15 @@
 {
+  "injective-testnet": {
+    "chainName": "Injective Testnet",
+    "chainId": "injective-888", 
+    "rpcEndpoint": "https://testnet.sentry.tm.injective.network:443",
+    "restEndpoint": "https://testnet.sentry.lcd.injective.network:443",
+    "faucetEndpoint": "https://testnet.faucet.injective.network", 
+    "addressPrefix": "inj",
+    "microDenom": "inj", 
+    "coinDecimals": "18",
+    "gasPrice": "500000000" 
+  },
   "juno-mainnet": {
     "chainName": "Juno Mainnet",
     "chainId": "juno-1",

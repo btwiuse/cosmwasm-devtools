@@ -18,7 +18,7 @@ export interface ConnectionState {
 }
 
 const initialState: ConnectionState = {
-    config: presets["juno-uni"],
+    config: presets["injective-testnet"],
     modalOpen: false,
     status: ConnectionStatus.Connecting,
     forceRefresh: false,
